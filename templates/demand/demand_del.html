@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Удалить требование
+{% endblock %}
+
+{% block content %}
+  <h1>Удалить требование</h1>
+  <form method="post">
+    {% csrf_token %}
+    <h3>Вы действительно хотите удалить требование <strong>{{ demand.title }}</strong>?</h3>
+    <a href="{% url 'demand_list' %}" class="btn btn-primary"><span class="icon icon-reply"></span> Назад</a>
+    <button type="submit" name="button" class="btn btn-danger"><span class="icon icon-trash"></span> Удалить</button>
+  </form>
+{% endblock %}

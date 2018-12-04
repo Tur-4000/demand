@@ -1,0 +1,21 @@
+{% extends 'demand/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+  <h1>Редактировать требование</h1>
+
+  <form action="" method="post" class="">
+    {% csrf_token %}
+
+      {{ form|crispy }}
+
+    <a href="{% url 'demand_list' %}" class="btn btn-primary"><span class="icon icon-reply"></span> Назад</a>
+    <button type="submit" class="btn btn-success"><span class="icon icon-floppy"></span> Сохранить</button>
+  </form>
+
+{% endblock %}
