@@ -6,6 +6,8 @@ User = get_user_model()
 
 
 class App(models.Model):
+    """Приложения к которым выставляются требования
+    """
     title = models.CharField(max_length=140,
                              verbose_name='Приложение',
                              db_index=True,

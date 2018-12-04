@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}
   {{ demand.title }}
 {% endblock %}
@@ -28,5 +30,24 @@
         <span class="icon icon-trash"></span> Удалить</a>
     </div>
   </div>
+
+  <form action="" method="post">
+    {% csrf_token %}
+
+    {% for field in form %}
+      <div class="form-group">
+        {% if field.errors %}
+          <div class="alert alert-danger">
+              {{ field.errors }}
+          </div>
+        {% endif %}
+
+        {{ field.label }}
+        {{ field }}
+      </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-success"><span class="icon icon-floppy"></span> Добавить</button>
+  </form>
 
 {% endblock %}

@@ -7,8 +7,9 @@ from demand.models import Demand, App, Comments
 class DemandAdmin(SummernoteModelAdmin):
     summernote_fields = ('description',)
 
-class CommentsAdmin(SummernoteModelAdmin):
-    summernote_fields = ('text',)
+
+class CommentsAdmin(admin.ModelAdmin):
+    list_display = ('user', 'created', 'demand', )
 
 
 admin.site.register(Demand, DemandAdmin)

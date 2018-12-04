@@ -3,7 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from .models import Demand
+from .models import Demand, Comments
+from .forms import CommentForm
 
 
 def demand_list(request):
@@ -15,7 +16,9 @@ def demand_list(request):
 
 class DemandDetailView(DetailView):
     model = Demand
+    form_class = CommentForm
     template_name = 'demand/demand_detail.html'
+    success_url = reverse_lazy('demand_detail')
 
 
 class DemandCreateView(CreateView):
