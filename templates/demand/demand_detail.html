@@ -11,7 +11,7 @@
       <span class="badge badge-info">{{ app }}</span>
     {% endfor %}
   </p>
-  <p>{{ demand.description }}</p>
+  <p>{{ demand.description|safe }}</p>
   <div class="row">
     <div class="col-md-4">
       <a href="{% url 'demand_list' %}" class="btn btn-primary">
