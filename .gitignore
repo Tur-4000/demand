@@ -7,6 +7,7 @@ __pycache__/
 *.code-workspace
 *.db
 *.bak
+*.xlsx
 
 # C extensions
 *.so

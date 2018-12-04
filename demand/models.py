@@ -1,4 +1,8 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
 
 
 class App(models.Model):
@@ -30,6 +34,7 @@ class Demand(models.Model):
         (OPERATING, 'В работе')
     )
 
+    user = models.ForeignKey(User, verbose_name='Автор', on_delete=models.CASCADE, default=1)
     title = models.CharField(verbose_name="Наименование",
                              max_length=140,
                              db_index=True,
@@ -41,6 +46,8 @@ class Demand(models.Model):
                                               verbose_name='Статус',
                                               db_index=True,
                                               blank=False)
+    created = models.DateTimeField('Дата создания', auto_now_add=True, null=True, blank=True)
+    last_edited = models.DateTimeField('Последнее редактирование', auto_now=True)
 
     class Meta:
         verbose_name = 'Требование'
@@ -49,3 +56,9 @@ class Demand(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comments(models.Model):
+    """Комментарии
+    """
+    pass
