@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ demand.title }}
+{% endblock %}
+
+{% block content %}
+  <h3>{{ demand.title }}</h3>
+  <p>
+    {% for app in demand.for_apps.all %}
+      <span class="badge badge-info">{{ app }}</span>
+    {% endfor %}
+  </p>
+  <p>{{ demand.description }}</p>
+  <div class="row">
+    <div class="col-md-4">
+      <a href="{% url 'demand_list' %}" class="btn btn-primary">
+        <span class="icon icon-reply"></span> Назад</a>
+    </div>
+    <div class="col-md-4">
+      <a href="{% url 'demand_edit' demand.id %}" class="btn btn-primary">
+        <span class="icon icon-pencil"></span> Редактировать</a>
+    </div>
+    <div class="col-md-4">
+      <a href="{% url 'demand_del' demand.id %}" class="btn btn-danger">
+        <span class="icon icon-trash"></span> Удалить</a>
+    </div>
+  </div>
+
+{% endblock %}

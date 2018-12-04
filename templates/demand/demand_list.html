@@ -13,7 +13,6 @@
       <tr>
         <th></th>
         <th>Наименование</th>
-        <th>Описание</th>
         <th>Статус</th>
       </tr>
     </thead>
@@ -31,16 +30,14 @@
         {% endif %}
         >
           <td>
-            <a href="{% url 'demand_edit' demand.id %}"><span class="icon icon-pencil"></span></a><br><br>
-            <a href="{% url 'demand_del' demand.id %}" class="red"><span class="icon icon-trash"></span></a>
+            {{ demand.id }}
           </td>
           <td>
-            {{ demand.title }}<br>
+            <a href="{% url 'demand_detail' demand.id %}">{{ demand.title }}</a><br>
             {% for app in demand.for_apps.all %}
               <span class="badge badge-secondary">{{ app }}</span>
             {% endfor %}
           </td>
-          <td>{{ demand.description }}</td>
           <td>{{ demand.get_status_display }}</td>
         </tr>
       {% endfor %}

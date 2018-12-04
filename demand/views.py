@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from .models import Demand
@@ -10,6 +11,11 @@ def demand_list(request):
     return render(request,
                   'demand/demand_list.html',
                   {'demands': demands, 'title': 'Список требований'})
+
+
+class DemandDetailView(DetailView):
+    model = Demand
+    template_name = 'demand/demand_detail.html'
 
 
 class DemandCreateView(CreateView):
