@@ -34,7 +34,7 @@ class Demand(models.Model):
         (OPERATING, 'В работе')
     )
 
-    user = models.ForeignKey(User, verbose_name='Автор', on_delete=models.CASCADE, default=1)
+    user = models.ForeignKey(User, verbose_name='Автор', on_delete=models.DO_NOTHING, default=1)
     title = models.CharField(verbose_name="Наименование",
                              max_length=140,
                              db_index=True,
@@ -61,4 +61,21 @@ class Demand(models.Model):
 class Comments(models.Model):
     """Комментарии
     """
-    pass
+    user = models.ForeignKey(User,
+                             verbose_name='Пользователь',
+                             on_delete=models.DO_NOTHING,
+                             null=True)
+    demand = models.ForeignKey(Demand,
+                               verbose_name='Требование',
+                               on_delete=models.CASCADE,
+                               null=True)
+    text = models.TextField('Комментарий', null=True, blank=True)
+    created = models.DateTimeField('Дата создания', auto_now_add=True, null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+
+    def __str__(self):
+        return '{}'.format(self.user)
+

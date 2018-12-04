@@ -6,6 +6,8 @@
 
 {% block content %}
   <h3>{{ demand.title }}</h3>
+  <p>Автор: {{ demand.user }}</p>
+  <p>Создано: {{ demand.created }} | Последнее изменение: {{ demand.last_edited }}</p>
   <p>
     {% for app in demand.for_apps.all %}
       <span class="badge badge-info">{{ app }}</span>
