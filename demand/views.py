@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from .models import Demand, Comments
 from .forms import CommentForm
+from .models import Demand, Comments
 
 
 def demand_list(request):
@@ -19,6 +19,27 @@ class DemandDetailView(DetailView):
     form_class = CommentForm
     template_name = 'demand/demand_detail.html'
     success_url = reverse_lazy('demand_detail')
+
+
+def demand_detail(request, pk):
+    demand = get_object_or_404(Demand, id=pk)
+    comments = Comments.objects.filter(demand=pk)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            if request.user:
+                form.user = request.user
+                form.demand = demand
+                form.save()
+        return redirect(demand_detail, pk)
+    else:
+        form = CommentForm()
+
+    return render(request,
+                  'demand/demand_detail.html',
+                  {'demand': demand, 'form': form, 'comments': comments})
 
 
 class DemandCreateView(CreateView):

@@ -30,24 +30,33 @@
         <span class="icon icon-trash"></span> Удалить</a>
     </div>
   </div>
-
-  <form action="" method="post">
-    {% csrf_token %}
-
-    {% for field in form %}
-      <div class="form-group">
-        {% if field.errors %}
-          <div class="alert alert-danger">
-              {{ field.errors }}
-          </div>
-        {% endif %}
-
-        {{ field.label }}
-        {{ field }}
+  <br><br>
+  <div class="col-md-6">
+  {% if comments %}
+    {% for comment in comments %}
+      <div  class="card">
+        <div class="card-header">
+          <b>{{ comment.user }}</b> | {{ comment.created }}
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+          {{ comment.text }}
+          </p>
+        </div>
       </div>
+      <br>
     {% endfor %}
+  {% endif %}
+  </div>
 
-    <button type="submit" class="btn btn-success"><span class="icon icon-floppy"></span> Добавить</button>
-  </form>
+  <div class="col-md-6">
+    <form action="" method="post">
+      {% csrf_token %}
+
+      {{ form|crispy }}
+
+      <button type="submit" class="btn btn-success"><span class="icon icon-floppy"></span> Добавить</button>
+    </form>
+  </div>
 
 {% endblock %}
