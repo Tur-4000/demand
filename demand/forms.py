@@ -9,6 +9,7 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comments
         fields = ('text', )
+        labels = ('Добавить комментарий', )
         widgets = {
             'text': forms.Textarea(attrs={'cols': '40',
                                           'rows': '3'}),
