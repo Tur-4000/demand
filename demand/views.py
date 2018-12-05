@@ -28,11 +28,11 @@ def demand_detail(request, pk):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            form = form.save(commit=False)
+            comment = form.save(commit=False)
             if request.user:
-                form.user = request.user
-                form.demand = demand
-                form.save()
+                comment.user = request.user
+                comment.demand = demand
+                comment.save()
         return redirect(demand_detail, pk)
     else:
         form = CommentForm()
