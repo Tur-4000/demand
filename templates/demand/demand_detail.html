@@ -7,31 +7,40 @@
 {% endblock %}
 
 {% block content %}
-  <h3>{{ demand.title }}</h3>
-  <p>Автор: {{ demand.user }}</p>
-  <p>Создано: {{ demand.created }} | Последнее изменение: {{ demand.last_edited }}</p>
-  <p>
-    {% for app in demand.for_apps.all %}
-      <span class="badge badge-info">{{ app }}</span>
-    {% endfor %}
-  </p>
-  <p>{{ demand.description|safe }}</p>
-  <div class="row">
-    <div class="col-md-4">
-      <a href="{% url 'demand_list' %}" class="btn btn-primary">
-        <span class="icon icon-reply"></span> Назад</a>
-    </div>
-    <div class="col-md-4">
-      <a href="{% url 'demand_edit' demand.id %}" class="btn btn-primary">
-        <span class="icon icon-pencil"></span> Редактировать</a>
-    </div>
-    <div class="col-md-4">
-      <a href="{% url 'demand_del' demand.id %}" class="btn btn-danger">
-        <span class="icon icon-trash"></span> Удалить</a>
+  <div class="jumbotron">
+    <h3>{{ demand.title }}</h3>
+    <p class="lead">Автор: {{ demand.user }} <br>
+      Зарегистрировано: {{ demand.created }} <br>
+      Последнее изменение: {{ demand.last_edited }}</p>
+    <p>
+      {% for app in demand.for_apps.all %}
+        <span class="badge badge-info">{{ app }}</span>
+      {% endfor %}
+    </p>
+    <hr class="my-4">
+    <p>{{ demand.description|safe }}</p>
+    <div class="row justify-content-between">
+      <div class="row">
+        <div class="col">
+          <a href="{% url 'demand_list' %}" class="btn btn-primary btn-sm">
+            <span class="icon icon-reply"></span> Назад</a>
+        </div>
+      </div>
+      <div class="row justify-content-end">
+        <div class="col">
+          <a href="{% url 'demand_edit' demand.id %}" class="btn btn-primary btn-sm">
+            <span class="icon icon-pencil"></span> Редактировать</a>
+        </div>
+        <div class="col">
+          <a href="{% url 'demand_del' demand.id %}" class="btn btn-danger btn-sm">
+            <span class="icon icon-trash"></span> Удалить</a>
+        </div>
+      </div>
     </div>
   </div>
-  <br><br>
-  <div class="col-md-6">
+
+  <div class="col-md-9">
+  <h4>Обсуждение</h4>
   {% if comments %}
     {% for comment in comments %}
       <div  class="card">
