@@ -1,4 +1,5 @@
 {% extends 'demand/base.html' %}
+{% load static %}
 
 {% block title %}
   {{ title }}
@@ -43,4 +44,23 @@
       {% endfor %}
     </tbody>
   </table>
+{% endblock %}
+
+{% block scripts %}
+  {{ block.super }}
+  {#    DataTables#}
+  <script>
+    $(document).ready(function() {
+      $('#dataTable').DataTable({
+        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Все"]],
+        "columnDefs": [
+          { "orderable": false, "targets": 0 }
+        ],
+        "order": [[ 2, 'asc' ]],
+        language: {
+            url: "{%  static 'js/Russian.json' %}"
+        }
+      });
+    } );
+  </script>
 {% endblock %}
