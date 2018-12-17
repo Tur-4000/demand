@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/photon-icon.css' %}">
   <link rel="stylesheet" href="{% static 'css/datatables.min.css' %}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
   <title>{% block title %}{% endblock %}</title>
@@ -65,29 +66,24 @@
     </div>
   </div>
 
-{#  Scripts#}
+  <footer class="footer">
+    <div class="container-footer">
+      <span class="text-muted">&copy; Turbanov</span>
+    </div>
+  </footer>
 
+{#  Scripts#}
+  {% block scripts %}
     <script src="{% static 'js/jQuery.1.12.4.min.js' %}"></script>
-    <script src="{% static 'js/datatables.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
 
+{# DataTables #}
+    <script src="{% static 'js/datatables.min.js' %}"></script>
 
-{#    DataTables#}
-    <script>
-      $(document).ready(function() {
-        $('#dataTable').DataTable({
-          "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Все"]],
-          "columnDefs": [
-            { "orderable": false, "targets": 0 }
-          ],
-          "order": [[ 2, 'asc' ]],
-          language: {
-              url: "{%  static 'js/Russian.json' %}"
-          }
-        });
-      } );
-    </script>
+{# Select2 #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
+  {% endblock %}
 </body>
 </html>

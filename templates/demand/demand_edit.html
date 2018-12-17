@@ -19,3 +19,17 @@
   </form>
 
 {% endblock %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script>
+    $(document).ready(function() {
+      $('.selectmultiple').select2();
+    });
+
+    $(document).ready(function() {
+      $('.select').select2();
+    });
+
+  </script>
+{% endblock %}
