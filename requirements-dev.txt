@@ -1,0 +1,2 @@
+-r requirements.txt
+waitress==1.1.0
