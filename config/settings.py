@@ -157,6 +157,6 @@ SUMMERNOTE_CONFIG = {
         # Change editor size
         'width': '600',
         'height': '250',
-        'lang': 'ru-ru',
+        'lang': 'ru-RU',
     }
 }
