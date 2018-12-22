@@ -35,13 +35,20 @@ class Demand(models.Model):
         (AWAIT, 'Не начат'),
         (OPERATING, 'В работе')
     )
-
+    PRIORITY = (
+        (1, 'Нужно вчера'),
+        (2, 'Надо сделать'),
+        (3, 'Хотелки'),
+    )
     user = models.ForeignKey(User, verbose_name='Автор', on_delete=models.DO_NOTHING, default=1)
     title = models.CharField(verbose_name="Наименование",
                              max_length=250,
                              db_index=True,
                              blank=False)
     for_apps = models.ManyToManyField(App, verbose_name='Приложения')
+    priority = models.PositiveSmallIntegerField(choices=PRIORITY,
+                                                verbose_name='Приоритет',
+                                                default=3)
     description = models.TextField(verbose_name='Описание',
                                    blank=False)
     status = models.PositiveSmallIntegerField(choices=STATUS,

@@ -13,6 +13,7 @@
     <thead class="thead-dark">
       <tr>
         <th></th>
+        <th></th>
         <th>Наименование</th>
         <th>Статус</th>
       </tr>
@@ -34,6 +35,17 @@
             {{ demand.id }}
           </td>
           <td>
+            <span class="fas fa-bookmark
+             {% if demand.priority == 1 %}
+                red
+             {% elif demand.priority == 2 %}
+                orange
+             {% else %}
+                gray
+             {% endif %}
+            "></span>
+          </td>
+          <td>
             <a href="{% url 'demand_detail' demand.id %}">{{ demand.title }}</a><br>
             {% for app in demand.for_apps.all %}
               <a href="{% url 'app_filter' app.id %}"><span class="badge badge-secondary">{{ app }}</span></a>
@@ -52,15 +64,16 @@
   <script>
     $(document).ready(function() {
       $('#dataTable').DataTable({
+
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Все"]],
         "columnDefs": [
           { "orderable": false, "targets": 0 }
         ],
-        "order": [[ 2, 'asc' ]],
+        "order": [[ 3, 'asc' ]],
         language: {
             url: "{%  static 'js/Russian.json' %}"
         }
-      });
+      } );
     } );
   </script>
 {% endblock %}

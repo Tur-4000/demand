@@ -3,9 +3,9 @@
     margin-right: 0px !important;
 }
 
-.red {
-    color: darkred;
-}
+.red { color: red; }
+.orange { color: darkorange; }
+.gray { color: gray; }
 
 .footer {
     /*position: absolute;*/

@@ -156,7 +156,7 @@ SUMMERNOTE_CONFIG = {
     'iframe': True,
     'summernote': {
         # Change editor size
-        'width': '600',
+        # 'width': '600',
         'height': '250',
         'lang': 'ru-RU',
     }
