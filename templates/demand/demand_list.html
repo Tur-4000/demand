@@ -36,7 +36,7 @@
           <td>
             <a href="{% url 'demand_detail' demand.id %}">{{ demand.title }}</a><br>
             {% for app in demand.for_apps.all %}
-              <span class="badge badge-secondary">{{ app }}</span>
+              <a href="{% url 'app_filter' app.id %}"><span class="badge badge-secondary">{{ app }}</span></a>
             {% endfor %}
           </td>
           <td>{{ demand.get_status_display }}</td>

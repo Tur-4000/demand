@@ -1,10 +1,9 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
-from django.conf import settings
+from django.views.generic.edit import DeleteView
 
 from .forms import CommentForm, DemandForm
 from .models import Demand, Comments
@@ -88,6 +87,11 @@ class DemandDeleteView(LoginRequiredMixin, DeleteView):
     model = Demand
     template_name = 'demand/demand_del.html'
     success_url = reverse_lazy('demand_list')
+
+
+def app_filter(request, app_id):
+    demands = Demand.objects.filter(for_apps__id=app_id).all()
+    return render(request, 'demand/demand_list.html', {'demands': demands})
 
 
 # class DemandCreateView(LoginRequiredMixin, CreateView):

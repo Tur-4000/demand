@@ -7,4 +7,5 @@ urlpatterns = [
     path('delete/<int:pk>/', views.DemandDeleteView.as_view(), name='demand_del'),
     path('edit/<int:pk>', views.demand_edit, name='demand_edit'),
     path('demand_detail/<int:pk>', views.demand_detail, name="demand_detail"),
+    path('demand/filter/<int:app_id>', views.app_filter, name='app_filter'),
 ]
