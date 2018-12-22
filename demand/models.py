@@ -38,7 +38,7 @@ class Demand(models.Model):
 
     user = models.ForeignKey(User, verbose_name='Автор', on_delete=models.DO_NOTHING, default=1)
     title = models.CharField(verbose_name="Наименование",
-                             max_length=140,
+                             max_length=250,
                              db_index=True,
                              blank=False)
     for_apps = models.ManyToManyField(App, verbose_name='Приложения')

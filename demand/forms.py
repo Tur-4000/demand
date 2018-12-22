@@ -1,6 +1,7 @@
 from django import forms
+from django_summernote.widgets import SummernoteWidget
 
-from .models import Comments
+from .models import Comments, Demand
 
 
 class CommentForm(forms.ModelForm):
@@ -10,6 +11,19 @@ class CommentForm(forms.ModelForm):
         model = Comments
         fields = ('text', )
         widgets = {
-            'text': forms.Textarea(attrs={'cols': '40',
-                                          'rows': '3'}),
+            'text': SummernoteWidget(),
+        }
+
+
+class DemandForm(forms.ModelForm):
+    """Форма добавления и редактирования требований
+    """
+    class Meta:
+        model = Demand
+        fields = ('title', 'for_apps', 'description', 'status')
+        widgets = {
+            'title': forms.TextInput(),
+            'for_apps': forms.SelectMultiple(),
+            'description': SummernoteWidget(),
+            'status': forms.Select(),
         }

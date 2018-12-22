@@ -3,8 +3,10 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
-from .forms import CommentForm
+from .forms import CommentForm, DemandForm
 from .models import Demand, Comments
 
 
@@ -22,6 +24,7 @@ class DemandDetailView(LoginRequiredMixin, DetailView):
     success_url = reverse_lazy('demand_detail')
 
 
+@login_required
 def demand_detail(request, pk):
     demand = get_object_or_404(Demand, id=pk)
     comments = Comments.objects.filter(demand=pk)
@@ -34,13 +37,49 @@ def demand_detail(request, pk):
                 comment.user = request.user
                 comment.demand = demand
                 comment.save()
-        return redirect(demand_detail, pk)
+        return redirect('demand_detail', pk)
     else:
         form = CommentForm()
 
     return render(request,
                   'demand/demand_detail.html',
                   {'demand': demand, 'form': form, 'comments': comments})
+
+
+@login_required
+def demand_new(request):
+    if request.method == 'POST':
+        form = DemandForm(request.POST)
+        if form.is_valid():
+            demand = form.save(commit=False)
+            if request.user:
+                demand.user = request.user
+                demand.save()
+                form.save_m2m()
+        return redirect('demand_list')
+    else:
+        form = DemandForm()
+        return render(request, 'demand/demand_add.html', {'form': form})
+
+
+@login_required
+def demand_edit(request, pk):
+    if request.method == 'POST':
+        demand = get_object_or_404(Demand, id=pk)
+        form = DemandForm(request.POST, instance=demand)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.save()
+            form.save_m2m()
+        else:
+            return render(request, 'demand/demand_edit.html',
+                          {'form': form, 'demand': demand})
+        return redirect('demand_detail', pk)
+    else:
+        demand = get_object_or_404(Demand, id=pk)
+        form = DemandForm(initial=demand)
+        return render(request, 'demand/demand_edit.html',
+                      {'form': form, 'demand': demand})
 
 
 class DemandCreateView(LoginRequiredMixin, CreateView):

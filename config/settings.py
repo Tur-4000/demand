@@ -25,12 +25,20 @@ SECRET_KEY = '37oyszii$)u7r4yh!-0bj6e5pwb13&*u4teu+p95&pm)ql3y+('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.50.10', '127.0.0.1']
+ALLOWED_HOSTS = ['srv-demand.ukmig.local',
+                 '192.168.51.25',
+                 '192.168.6.67',
+                 '192.168.50.10',
+                 '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'user',
+    'demand',
+    # 'users',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,9 +48,6 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'django_summernote',
-
-    'demand',
-    'users',
 ]
 
 MIDDLEWARE = [
@@ -141,6 +146,17 @@ SUMMERNOTE_THEME = 'bs4'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-AUTH_USER_MODEL = 'users.CustomUser'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+# AUTH_USER_MODEL = 'users.CustomUser'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'demand_list'
+LOGOUT_REDIRECT_URL = 'demand_list'
+
+SUMMERNOTE_CONFIG = {
+    'iframe': True,
+    'summernote': {
+        # Change editor size
+        'width': '600',
+        'height': '250',
+        'lang': 'ru-ru',
+    }
+}
