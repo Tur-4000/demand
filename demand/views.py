@@ -56,6 +56,8 @@ def demand_new(request):
                 demand.user = request.user
                 demand.save()
                 form.save_m2m()
+        else:
+            return render(request, 'demand/demand_edit.html', {'form': form})
         return redirect('demand_list')
     else:
         form = DemandForm()
@@ -77,16 +79,9 @@ def demand_edit(request, pk):
         return redirect('demand_detail', pk)
     else:
         demand = get_object_or_404(Demand, id=pk)
-        form = DemandForm(initial=demand)
+        form = DemandForm(instance=demand)
         return render(request, 'demand/demand_edit.html',
                       {'form': form, 'demand': demand})
-
-
-class DemandCreateView(LoginRequiredMixin, CreateView):
-    model = Demand
-    template_name = 'demand/demand_add.html'
-    fields = '__all__'
-    success_url = reverse_lazy('demand_list')
 
 
 class DemandDeleteView(LoginRequiredMixin, DeleteView):
@@ -95,8 +90,15 @@ class DemandDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('demand_list')
 
 
-class DemandUpdateView(LoginRequiredMixin, UpdateView):
-    model = Demand
-    template_name = 'demand/demand_edit.html'
-    fields = '__all__'
-    success_url = reverse_lazy('demand_list')
+# class DemandCreateView(LoginRequiredMixin, CreateView):
+#     model = Demand
+#     template_name = 'demand/demand_add.html'
+#     fields = '__all__'
+#     success_url = reverse_lazy('demand_list')
+#
+#
+# class DemandUpdateView(LoginRequiredMixin, UpdateView):
+#     model = Demand
+#     template_name = 'demand/demand_edit.html'
+#     fields = '__all__'
+#     success_url = reverse_lazy('demand_list')
