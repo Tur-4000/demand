@@ -7,6 +7,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/photon-icon.css' %}">
 
@@ -21,8 +22,10 @@
   <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #555;">
-    <a class="navbar-brand" href="/">Navbar</a>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #620019;">
+    <a class="navbar-brand" href="/">
+      <img src="{% static 'img/mig-min.png' %}" width="60" height="30" alt="">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -30,7 +33,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'demand_list' %}">Требования</a>
+            <a class="nav-link" href="{% url 'demand_list' %}">
+              <span class="icon icon-list"></span>
+              Требования</a>
         </li>
       </ul>
 
