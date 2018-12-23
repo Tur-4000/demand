@@ -23,8 +23,8 @@ def demand_list_deleted(request):
                   {'demands': demands, 'title': 'Список требований'})
 
 
-def app_filter(request, app_id):
-    demands = Demand.objects.filter(for_apps__id=app_id).all()
+def app_filter(request, slug):
+    demands = Demand.objects.filter(for_apps__slug=slug, is_deleted=False).all()
     return render(request, 'demand/demand_list.html', {'demands': demands})
 
 

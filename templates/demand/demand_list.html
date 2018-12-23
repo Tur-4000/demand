@@ -48,7 +48,7 @@
           <td>
             <a href="{{ demand.get_absolute_url }}">{{ demand.title }}</a><br>
             {% for app in demand.for_apps.all %}
-              <a href="{% url 'app_filter' app.id %}"><span class="badge badge-secondary">{{ app }}</span></a>
+              <a href="{% url 'app_filter' app.slug %}"><span class="badge badge-secondary">{{ app.title }}</span></a>
             {% endfor %}
           </td>
           <td>{{ demand.get_status_display }}</td>
