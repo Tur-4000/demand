@@ -1,0 +1,53 @@
+{% extends 'demand/base.html' %}
+{% load static %}
+
+{% block title %}
+  Список приложений
+{% endblock %}
+
+{% block content %}
+  <h1>Справочник приложений</h1>
+  <p><a href="{% url 'app_add' %}"><span class="icon icon-list-add"></span> Добавить приложение</a></p>
+
+  <table class="table table-sm table-hover table-bordered table-striped" id="dataTable">
+    <thead class="thead-dark">
+    <tr>
+      <th></th>
+      <th>Приложение</th>
+      <th>SLUG</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for app in apps %}
+
+    <tr>
+      <td>{{ app.id }}</td>
+      <td>
+        <a href="{% url 'app_edit' app.id %}">
+          {{ app.title }}
+        </a>
+      </td>
+      <td>{{ app.slug }}</td>
+    </tr>
+
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block scripts %}
+  {{ block.super }}
+  {#    DataTables#}
+  <script>
+    $(document).ready(function() {
+      $('#dataTable').DataTable({
+
+        "lengthMenu": [[15, 30, -1], [15, 30, "Все"]],
+
+        language: {
+            url: "{%  static 'js/Russian.json' %}"
+        }
+      } );
+    } );
+  </script>
+{% endblock %}

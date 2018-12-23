@@ -9,4 +9,7 @@ urlpatterns = [
     path('demand_detail/<int:pk>', views.demand_detail, name="demand_detail"),
     path('demand/filter/<str:slug>', views.app_filter, name='app_filter'),
     path('demand_deleted/', views.demand_list_deleted, name='demand_list_deleted'),
+    path('app_list', views.app_list, name='app_list'),
+    path('app_add', views.app_new, name='app_add'),
+    path('app_edit/<int:pk>/', views.app_edit, name='app_edit'),
 ]

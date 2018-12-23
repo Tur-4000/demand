@@ -48,6 +48,9 @@
           </a>
 
           <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'app_list' %}">
+              <span class="icon icon-window"></span>
+              Справочник приложений</a>
             <a class="dropdown-item" href="{% url 'demand_list_deleted' %}">
               <span class="icon icon-list"></span>
               Удалённые требования</a>
@@ -79,7 +82,9 @@
               {% endif %}
             </div>
           {% else %}
-            <a href="{% url 'login' %}">Войти</a>
+            <a href="{% url 'login' %}">
+              <span class="icon icon-login"></span>
+              Войти</a>
           {% endif %}
         </li>
       </ul>

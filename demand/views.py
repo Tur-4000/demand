@@ -5,8 +5,8 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic.edit import DeleteView
 
-from .forms import CommentForm, DemandForm
-from .models import Demand, Comments
+from .forms import CommentForm, DemandForm, AppForm
+from .models import Demand, Comments, App
 
 
 def demand_list(request):
@@ -106,16 +106,42 @@ def demand_delete_mark(request, demand_id):
     return render(request, 'demand/demand_del.html', {'demand': demand})
 
 
+@login_required
 def app_list(request):
-    pass
+    apps = App.objects.all()
+    return render(request, 'demand/app_list.html', {'apps': apps})
 
 
+@login_required
 def app_new(request):
-    pass
+    title = 'Добавить приложение'
+    if request.method == 'POST':
+        form = AppForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            return render(request, 'demand/app.html', {'form': form, 'title': title})
+        return redirect('app_list')
+    else:
+        form = AppForm()
+        return render(request, 'demand/app.html', {'form': form, 'title': title})
 
 
-def app_edit(request, slug):
-    pass
+@login_required
+def app_edit(request, pk):
+    title = 'Редактировать приложение'
+    if request.method == 'POST':
+        app = get_object_or_404(App, id=pk)
+        form = AppForm(request.POST, instance=app)
+        if form.is_valid():
+            form.save()
+        else:
+            return render(request, 'demand/app.html', {'form': form, 'title': title})
+        return redirect('app_list')
+    else:
+        app = get_object_or_404(App, id=pk)
+        form = AppForm(instance=app)
+        return render(request, 'demand/app.html', {'form': form, 'title': title})
 
 
 # class DemandDeleteView(LoginRequiredMixin, DeleteView):

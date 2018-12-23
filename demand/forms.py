@@ -1,7 +1,7 @@
 from django import forms
 from django_summernote.widgets import SummernoteWidget
 
-from .models import Comments, Demand
+from .models import Comments, Demand, App
 
 
 class CommentForm(forms.ModelForm):
@@ -27,4 +27,15 @@ class DemandForm(forms.ModelForm):
             'priority': forms.Select(),
             'description': SummernoteWidget(),
             'status': forms.Select(),
+        }
+
+
+class AppForm(forms.ModelForm):
+    """Форма добавления и редактирования приложений
+    """
+    class Meta:
+        model = App
+        fields = ('title',)
+        widgets = {
+            'title': forms.TextInput(),
         }
