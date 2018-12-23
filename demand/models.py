@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
 
+from .utils import slugify
 
 User = get_user_model()
 
@@ -13,6 +14,10 @@ class App(models.Model):
                              verbose_name='Приложение',
                              db_index=True,
                              blank=False)
+    slug = models.SlugField(max_length=140,
+                            db_index=True,
+                            blank=True,
+                            null=True)
 
     class Meta:
         verbose_name = 'Приложение'
@@ -20,6 +25,10 @@ class App(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
 
 class Demand(models.Model):

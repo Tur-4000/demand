@@ -106,6 +106,18 @@ def demand_delete_mark(request, demand_id):
     return render(request, 'demand/demand_del.html', {'demand': demand})
 
 
+def app_list(request):
+    pass
+
+
+def app_new(request):
+    pass
+
+
+def app_edit(request, slug):
+    pass
+
+
 # class DemandDeleteView(LoginRequiredMixin, DeleteView):
 #     model = Demand
 #     template_name = 'demand/demand_del.html'
