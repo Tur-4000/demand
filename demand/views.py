@@ -10,10 +10,22 @@ from .models import Demand, Comments
 
 
 def demand_list(request):
-    demands = Demand.objects.all()
+    demands = Demand.objects.filter(is_deleted=False)
     return render(request,
                   'demand/demand_list.html',
                   {'demands': demands, 'title': 'Список требований'})
+
+
+def demand_list_deleted(request):
+    demands = Demand.objects.filter(is_deleted=True)
+    return render(request,
+                  'demand/demand_list.html',
+                  {'demands': demands, 'title': 'Список требований'})
+
+
+def app_filter(request, app_id):
+    demands = Demand.objects.filter(for_apps__id=app_id).all()
+    return render(request, 'demand/demand_list.html', {'demands': demands})
 
 
 class DemandDetailView(LoginRequiredMixin, DetailView):
@@ -83,16 +95,22 @@ def demand_edit(request, pk):
                       {'form': form, 'demand': demand})
 
 
-class DemandDeleteView(LoginRequiredMixin, DeleteView):
-    model = Demand
-    template_name = 'demand/demand_del.html'
-    success_url = reverse_lazy('demand_list')
+@login_required
+def demand_delete_mark(request, demand_id):
+    if request.method == 'POST':
+        demand = Demand.objects.get(id=demand_id)
+        demand.is_deleted = True
+        demand.save()
+        return redirect('demand_detail', demand_id)
+    demand = get_object_or_404(Demand, id=demand_id)
+    return render(request, 'demand/demand_del.html', {'demand': demand})
 
 
-def app_filter(request, app_id):
-    demands = Demand.objects.filter(for_apps__id=app_id).all()
-    return render(request, 'demand/demand_list.html', {'demands': demands})
-
+# class DemandDeleteView(LoginRequiredMixin, DeleteView):
+#     model = Demand
+#     template_name = 'demand/demand_del.html'
+#     success_url = reverse_lazy('demand_list')
+#
 
 # class DemandCreateView(LoginRequiredMixin, CreateView):
 #     model = Demand

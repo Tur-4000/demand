@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.shortcuts import reverse
 
 
 User = get_user_model()
@@ -57,6 +58,7 @@ class Demand(models.Model):
                                               blank=False)
     created = models.DateTimeField('Дата создания', auto_now_add=True, null=True, blank=True)
     last_edited = models.DateTimeField('Последнее редактирование', auto_now=True)
+    is_deleted = models.BooleanField(default=False, verbose_name='Удалено', db_index=True)
 
     class Meta:
         verbose_name = 'Требование'
@@ -65,6 +67,9 @@ class Demand(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('demand_detail', kwargs={'pk': self.id})
 
 
 class Comments(models.Model):

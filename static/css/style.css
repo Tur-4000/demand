@@ -22,3 +22,11 @@
     margin-left: auto;
     padding: 0 15px;
 }
+
+.btn-mig-negative {
+    background-color: #edecd6;
+    color: #620019;
+}
+.btn-mig-negative:hover {
+    background-color: #fffbdb;
+}
