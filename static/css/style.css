@@ -30,3 +30,9 @@
 .btn-mig-negative:hover {
     background-color: #fffbdb;
 }
+.nav-link-mig {
+    color:  #edecd6;
+}
+.nav-link-mig:hover {
+    color:  #fffbdb;
+}
