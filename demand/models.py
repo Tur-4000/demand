@@ -17,7 +17,8 @@ class App(models.Model):
     slug = models.SlugField(max_length=140,
                             db_index=True,
                             blank=True,
-                            null=True)
+                            null=True,
+                            unique=True)
 
     class Meta:
         verbose_name = 'Приложение'
