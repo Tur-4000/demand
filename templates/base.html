@@ -34,20 +34,20 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link btn btn-outline-warning" href="{% url 'demand_list' %}">
+            <a class="btn btn-outline-mig" href="{% url 'demand_list' %}">
               <span class="icon icon-list"></span>
               Требования</a>
         </li>
       </ul>
 
       <ul class="navbar-nav">
-        <li class="nav-item mr-2">
-          <a class="btn btn-mig-negative dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item dropdown mr-2">
+          <a class="btn btn-outline-mig dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-book"></i>
             Справочники
           </a>
 
-          <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" href="{% url 'app_list' %}">
               <span class="icon icon-window"></span>
               Справочник приложений</a>
@@ -61,7 +61,7 @@
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           {% if user.is_authenticated %}
-            <a class="nav-link dropdown-toggle btn btn-outline-warning" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="btn btn-outline-mig dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="icon icon-user"></span>
               {{ user.username }}
             </a>

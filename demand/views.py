@@ -23,32 +23,35 @@ def demand_status_filter(request):
     operating = 100
     if request.GET.get('putaside'):
         putaside = 0
-    if request.GET.get('complete', ''):
+    if request.GET.get('complete'):
         complete = 1
-    if request.GET.get('await', ''):
+    if request.GET.get('await'):
         await = 2
-    if request.GET.get('operating', ''):
+    if request.GET.get('operating'):
         operating = 3
     demands = Demand.objects.filter(Q(is_deleted=False) &
-                                    Q(status=putaside) |
-                                    Q(status=complete) |
-                                    Q(status=await) |
-                                    Q(status=operating))
+                                    (Q(status=putaside) |
+                                     Q(status=complete) |
+                                     Q(status=await) |
+                                     Q(status=operating)))
     return render(request,
                   'demand/demand_list.html',
                   {'demands': demands, 'title': 'Список требований'})
 
 
 def demand_list_deleted(request):
+    title = 'Список удалённых требований'
     demands = Demand.objects.filter(is_deleted=True)
     return render(request,
                   'demand/demand_list.html',
-                  {'demands': demands, 'title': 'Список требований'})
+                  {'demands': demands, 'title': title})
 
 
 def app_filter(request, slug):
+    title = 'Список требований'
     demands = Demand.objects.filter(for_apps__slug=slug, is_deleted=False).all()
-    return render(request, 'demand/demand_list.html', {'demands': demands})
+    return render(request, 'demand/demand_list.html',
+                  {'demands': demands, 'title': title})
 
 
 class DemandDetailView(LoginRequiredMixin, DetailView):

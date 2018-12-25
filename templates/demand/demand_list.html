@@ -8,7 +8,7 @@
 {% block content %}
 
 
-  <div class="row justify-content-between">
+  <div class="row justify-content-between mb-1">
     <div>
       <h1>{{ title }}</h1>
       <p><a href="{% url 'demand_add' %}">
@@ -28,7 +28,7 @@
             <label for="await">Не начат</label>
           <input type="checkbox" name="operating" id="operating">
             <label for="operating">В работе</label>
-          <button type="submit" class="">Фильтровать</button>
+          <button type="submit" class="">Применить</button>
 
         </fieldset>
       </form>
@@ -59,7 +59,7 @@
         {% endif %}
         >
           <td>
-            {{ demand.created|date:"d/m/Y" }}
+            {{ demand.created|date:"Y-m-d" }}
           </td>
           <td>
             <span class="fas fa-bookmark

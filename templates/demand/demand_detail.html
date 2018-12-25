@@ -36,7 +36,7 @@
     </div>
     </div>
     <hr class="my-4">
-    <p>Автор: {{ demand.user }} <br>
+    <p>Автор: {{ demand.user.first_name }} {{ demand.user.last_name }} <br>
       Зарегистрировано: {{ demand.created }} <br>
       Последнее изменение: {{ demand.last_edited }}</p>
 

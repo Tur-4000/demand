@@ -20,13 +20,13 @@ class DemandForm(forms.ModelForm):
     """
     class Meta:
         model = Demand
-        fields = ('title', 'for_apps', 'priority', 'description', 'status')
+        fields = ('title', 'for_apps', 'status', 'priority', 'description')
         widgets = {
             'title': forms.TextInput(),
             'for_apps': forms.SelectMultiple(),
+            'status': forms.Select(),
             'priority': forms.Select(),
             'description': SummernoteWidget(),
-            'status': forms.Select(),
         }
 
 

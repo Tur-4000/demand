@@ -2,7 +2,9 @@
     margin-left: 0px !important;
     margin-right: 0px !important;
 }
-
+h1 {
+    color: #620019;
+}
 .red { color: red; }
 .orange { color: darkorange; }
 .gray { color: gray; }
@@ -23,19 +25,16 @@
     padding: 0 15px;
 }
 
-.btn-mig-negative {
-    background-color: #edecd6;
-    color: #620019;
+.btn-outline-mig {
+    border: 1px solid #fffbdb;
+    background-color: #620019;
+    color: #fffbdb !important;
 }
-.btn-mig-negative:hover {
+.btn-outline-mig:hover {
     background-color: #fffbdb;
+    color: #620019 !important;
 }
-.nav-link-mig {
-    color:  #edecd6;
-}
-.nav-link-mig:hover {
-    color:  #fffbdb;
-}
+
 .filter-fieldset {
     border: 1px solid #620019;
     border-radius: 5px;
