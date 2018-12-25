@@ -6,8 +6,35 @@
 {% endblock %}
 
 {% block content %}
-  <h1>{{ title }}</h1>
-  <p><a href="{% url 'demand_add' %}"><span class="icon icon-list-add"></span> Добавить требование</a></p>
+
+
+  <div class="row justify-content-between">
+    <div>
+      <h1>{{ title }}</h1>
+      <p><a href="{% url 'demand_add' %}">
+        <span class="icon icon-list-add"></span>
+        Добавить требование</a></p>
+    </div>
+    <div class="">
+      <form action="{% url 'demand_status_filter' %}" method="get">
+        <fieldset class="filter-fieldset">
+          <legend class="filter-legend">Фильтр по статусам</legend>
+
+          <input type="checkbox" name="putaside" id="putaside">
+            <label for="putaside">Отложен</label>
+          <input type="checkbox" name="complete" id="complete">
+            <label for="complete">Завершён</label>
+          <input type="checkbox" name="await" id="await">
+            <label for="await">Не начат</label>
+          <input type="checkbox" name="operating" id="operating">
+            <label for="operating">В работе</label>
+          <button type="submit" class="">Фильтровать</button>
+
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
 
   <table id="dataTable" class="table table-sm table-hover table-bordered">
     <thead class="thead-dark">
@@ -32,7 +59,7 @@
         {% endif %}
         >
           <td>
-            {{ demand.id }}
+            {{ demand.created|date:"d/m/Y" }}
           </td>
           <td>
             <span class="fas fa-bookmark
@@ -66,9 +93,9 @@
       $('#dataTable').DataTable({
 
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Все"]],
-        "columnDefs": [
-          { "orderable": false, "targets": 0 }
-        ],
+        {#"columnDefs": [#}
+        {#  { "orderable": false, "targets": 0 }#}
+        {#],#}
         "order": [[ 3, 'asc' ]],
         language: {
             url: "{%  static 'js/Russian.json' %}"

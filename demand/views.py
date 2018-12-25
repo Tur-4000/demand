@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
-from django.views.generic.edit import DeleteView
+from django.db.models import Q
 
 from .forms import CommentForm, DemandForm, AppForm
 from .models import Demand, Comments, App
@@ -11,6 +11,29 @@ from .models import Demand, Comments, App
 
 def demand_list(request):
     demands = Demand.objects.filter(is_deleted=False)
+    return render(request,
+                  'demand/demand_list.html',
+                  {'demands': demands, 'title': 'Список требований'})
+
+
+def demand_status_filter(request):
+    putaside = 100
+    complete = 100
+    await = 100
+    operating = 100
+    if request.GET.get('putaside'):
+        putaside = 0
+    if request.GET.get('complete', ''):
+        complete = 1
+    if request.GET.get('await', ''):
+        await = 2
+    if request.GET.get('operating', ''):
+        operating = 3
+    demands = Demand.objects.filter(Q(is_deleted=False) &
+                                    Q(status=putaside) |
+                                    Q(status=complete) |
+                                    Q(status=await) |
+                                    Q(status=operating))
     return render(request,
                   'demand/demand_list.html',
                   {'demands': demands, 'title': 'Список требований'})

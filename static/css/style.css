@@ -36,3 +36,14 @@
 .nav-link-mig:hover {
     color:  #fffbdb;
 }
+.filter-fieldset {
+    border: 1px solid #620019;
+    border-radius: 5px;
+    padding: 0px 10px 0px 10px;
+}
+.filter-legend {
+    font-size: 1.2em;
+    color: #620019;
+    width: 180px;
+    padding-left: 5px
+}
