@@ -15,9 +15,9 @@
         <h1><span class="fas fa-times-circle red"></span></h1>
       {% endif %}
         <h1><span class="fas fa-bookmark
-              {% if demand.priority == 1 %}
+              {% if demand.get_priority_display == 'Нужно вчера' %}
                 red
-              {% elif demand.priority == 2 %}
+              {% elif demand.get_priority_display == 'Надо сделать' %}
                 orange
               {% else %}
                 gray

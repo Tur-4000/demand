@@ -35,10 +35,10 @@ class App(models.Model):
 class Demand(models.Model):
     """Требования
     """
-    PUTASIDE = 0
-    COMPLETE = 1
-    AWAIT = 2
-    OPERATING = 3
+    PUTASIDE = 1
+    COMPLETE = 2
+    AWAIT = 3
+    OPERATING = 4
 
     STATUS = (
         (PUTASIDE, 'Отложен'),

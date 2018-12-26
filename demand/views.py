@@ -17,26 +17,31 @@ def demand_list(request):
 
 
 def demand_status_filter(request):
-    putaside = 100
-    complete = 100
-    await = 100
-    operating = 100
+    putaside = 0
+    complete = 0
+    a_wait = 0
+    operating = 0
     if request.GET.get('putaside'):
-        putaside = 0
+        putaside = 1
     if request.GET.get('complete'):
-        complete = 1
-    if request.GET.get('await'):
-        await = 2
+        complete = 2
+    if request.GET.get('a_wait'):
+        a_wait = 3
     if request.GET.get('operating'):
-        operating = 3
+        operating = 4
     demands = Demand.objects.filter(Q(is_deleted=False) &
                                     (Q(status=putaside) |
                                      Q(status=complete) |
-                                     Q(status=await) |
+                                     Q(status=a_wait) |
                                      Q(status=operating)))
     return render(request,
                   'demand/demand_list.html',
-                  {'demands': demands, 'title': 'Список требований'})
+                  {'demands': demands,
+                   'title': 'Список требований',
+                   'putaside': putaside,
+                   'complete': complete,
+                   'a_wait': a_wait,
+                   'operating': operating})
 
 
 def demand_list_deleted(request):

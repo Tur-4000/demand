@@ -20,13 +20,26 @@
         <fieldset class="filter-fieldset">
           <legend class="filter-legend">Фильтр по статусам</legend>
 
-          <input type="checkbox" name="putaside" id="putaside">
+          <input type="checkbox" name="putaside" id="putaside"
+                 {% if putaside %}
+                    checked
+                 {% endif %}
+          >
             <label for="putaside">Отложен</label>
-          <input type="checkbox" name="complete" id="complete">
+          <input type="checkbox" name="complete" id="complete"
+                 {% if complete %}
+                    checked
+                 {% endif %}>
             <label for="complete">Завершён</label>
-          <input type="checkbox" name="await" id="await">
-            <label for="await">Не начат</label>
-          <input type="checkbox" name="operating" id="operating">
+          <input type="checkbox" name="a_wait" id="a_wait"
+                 {% if a_wait %}
+                    checked
+                 {% endif %}>
+            <label for="a_wait">Не начат</label>
+          <input type="checkbox" name="operating" id="operating"
+                 {% if operating %}
+                    checked
+                 {% endif %}>
             <label for="operating">В работе</label>
           <button type="submit" class="">Применить</button>
 
@@ -63,9 +76,9 @@
           </td>
           <td>
             <span class="fas fa-bookmark
-             {% if demand.priority == 1 %}
+             {% if demand.get_priority_display == 'Нужно вчера' %}
                 red
-             {% elif demand.priority == 2 %}
+             {% elif demand.get_priority_display == 'Надо сделать' %}
                 orange
              {% else %}
                 gray
