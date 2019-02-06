@@ -45,7 +45,7 @@ def demand_status_filter(request):
 
 
 def demand_list_deleted(request):
-    title = 'Список удалённых требований'
+    title = 'Удалённые требования'
     demands = Demand.objects.filter(is_deleted=True)
     return render(request,
                   'demand/demand_list.html',
