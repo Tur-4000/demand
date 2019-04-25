@@ -22,7 +22,7 @@
 
   <title>{% block title %}{% endblock %}</title>
 </head>
-<body>
+<body class="base">
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #620019;">
     <a class="navbar-brand" href="/">
       <img src="{% static 'img/mig-min.png' %}" width="60" height="30" alt="">
@@ -91,7 +91,7 @@
       </ul>
   </div>
   </nav>
-  <div class="container mt-3">
+  <div class="container mt-3 content">
     <div class="row" style="margin-top: 80px">
       <div class="col-12">
         {% block content %}

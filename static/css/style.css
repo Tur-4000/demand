@@ -5,6 +5,16 @@
 h1 {
     color: #620019;
 }
+
+.base {
+    flex: 1;
+}
+.content {
+    display: flex;
+    min-height: 86vh;
+    flex-direction: column;
+}
+
 .red { color: red; }
 .orange { color: darkorange; }
 .gray { color: gray; }
